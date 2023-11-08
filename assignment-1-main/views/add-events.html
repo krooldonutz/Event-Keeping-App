@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <title>Add Event Page</title>
+    <!-- Include Bootstrap CSS styles -->
+    <link href="/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="background-color: #f6f4f2;">
+    <!-- Background color and image banner -->
+    <img src="/eventManagementApp.jpg" width="100%" height="20%" alt="Event Image"> <br>
+    
+    <!-- Container for the main content -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <!-- Container for header and navigation buttons -->
+            <div class="container text-center">
+                <!-- "Home" button to navigate back to the main page -->
+                <a type="button" class="btn btn-success" href="/">Home</a>
+                <br><br>
+                <!-- Title and description for the form -->
+                <h2>Add Event</h2>
+                <h5>Fill in event details & click submit</h5>
+            </div>
+            
+            <!-- Container for the card body and form -->
+            <div class="card-body">
+            </div>
+            
+            <!-- Column for the event submission form -->
+            <div class="col-md-6">
+                <!-- Event submission form -->
+                <form action="/cherylyn/event/add" method="post">
+                    <!-- Input field for Event Name -->
+                    <div class="mb-3">
+                        <br>
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" required pattern="^[a-zA-Z0-9]+$" placeholder="Enter Event name">
+                    </div>
+                    
+                    <!-- Input field for Event Description -->
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" name="description" class="form-control" placeholder="Enter Description">
+                    </div>
+                    
+                    <!-- Input field for Start Date and Time -->
+                    <div class="mb-3">
+                        <label for="startDateTime" class="form-label">Start Date Time</label>
+                        <input type="datetime-local" name="startDateTime" class="form-control" placeholder="Enter Start Date Time" required>
+                    </div>
+                    
+                    <!-- Input field for Event Duration in Minutes -->
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Duration in Minutes</label>
+                        <input type="number" name="duration" class="form-control" placeholder="Enter Duration" required>
+                    </div>
+                    
+                    <!-- Checkbox for Is Active status -->
+                    <div class="form-check">
+                        <label for="isActive" class="form-check-label">Is Active</label>
+                        <input type="checkbox" id="isActive" name="isActive" class="form-check-input" checked>
+                    </div> <br>
+                    
+                    <!-- Dropdown for selecting a picture -->
+                    <div class="mb-3">
+                        <label for="picture" class="form-label">Select Picture</label>
+                        <select name="picture" class="form-select" id="picture">
+                            <!-- Default option for the dropdown -->
+                            <option value="">Select an option</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Input field for Event Capacity -->
+                    <div class="mb-3">
+                        <label for="capacity" class="form-label">Capacity</label>
+                        <input type="number" name="capacity" class="form-control" placeholder="Enter Capacity">
+                    </div>
+                    
+                    <!-- Input field for Tickets Available -->
+                    <div class="mb-3">
+                        <label for="ticketsAvailable" class="form-label">Tickets Available</label>
+                        <input type="number" name="ticketsAvailable" class="form-control" placeholder="Enter Tickets Available">
+                    </div>
+                    
+                    <!-- Dropdown for selecting a Category -->
+                    <div class="mb-3">
+                        <label for="categoryId" class="form-label">Category</label>
+                        <select name="categoryId" class="form-control" required>
+                            <!-- Default option for the dropdown -->
+                            <option value="" disabled selected>Select a category</option>
+                            <!-- Loop to populate category options -->
+                            <% for (let i = 0; i < records.length; i++) { %>
+                                <option value="<%= records[i].id %>"><%= records[i].id %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    
+                    <!-- Submit button to add a new event -->
+                    <button type="submit" class="btn btn-secondary">Submit New Event</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript code to populate the dropdown dynamically -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the dropdown element
+            const pictureSelect = document.getElementById("picture");
+
+            // List of picture filenames
+            const pictures = ["event.jpeg", "orchestra.png"];
+
+            // Populate the dropdown with options
+            pictures.forEach((picture) => {
+                const option = document.createElement("option");
+                option.value = picture;
+                option.textContent = picture;
+                pictureSelect.appendChild(option);
+            });
+        });
+    </script>
+</body>
+</html>

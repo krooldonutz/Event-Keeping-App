@@ -1,0 +1,62 @@
+<!-- Container for displaying category details -->
+<div class="container-xl bg-light">
+    <!-- Display the category image -->
+    <img [src]="currCategory.image" class="img-fluid img-thumbnail" alt="Sheep">
+
+    <!-- Display category details -->
+    <p><strong>Category ID:</strong> {{ currCategory.categoryID }}</p>
+    <p><strong>Category Name:</strong> {{ currCategory.name | upperCase }}</p>
+    <p><strong>Category Description:</strong> {{ currCategory.desc }}</p>
+    <p><strong>Created Date Time:</strong> {{ currCategory.createdAt | date:'medium' }}</p>
+</div>
+
+<!-- Container for displaying events related to the category -->
+<div class="album py-5">
+    <div class="container">
+        <div class="row row-cols-1 g-3">
+            <div class="col">
+                <!-- Table for displaying event details -->
+                <table class="table">
+                    <!-- Table header -->
+                    <thead class="table-light">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>IsActive</th>
+                            <th>Image</th>
+                            <th>Capacity</th>
+                            <th>Tickets Available</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <!-- Table body -->
+                    <tbody>
+                        <tr *ngFor="let record of currCategory.eventsList">
+                            <td>{{ record.eventId }}</td>
+                            <td>{{ record.name }}</td>
+                            <td>{{ record.startDateTime | date:'medium' }}</td>
+                            <td>{{ (record.startDateTime + record.duration * 60000) | date:'medium' }}</td>
+                            <td>
+                                <div class="form-check">
+                                    <input type="checkbox" id="isActive{{ record.eventId }}" name="isActive{{ record.eventId }}" class="form-check-input" [checked]="record.isActive">
+                                </div>
+                            </td>
+                            <td class="w-25">
+                                <img [src]="record.image" class="img-fluid img-thumbnail" alt="Event Image">
+                            </td>
+                            <td>{{ record.capacity }}</td>
+                            <td>{{ record.ticketsAvailable }}</td>
+                            <td>
+                                <div class="container">
+                                    <a type="button" class="btn btn-primary" [href]="'/category/32578393/view-event/' + record.eventId">View</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

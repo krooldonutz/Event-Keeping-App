@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <title>Event Details</title>
+    <!-- Include Bootstrap CSS styles -->
+    <link href="/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="background-color: #f6f4f2;">
+    <!-- Image banner for the page -->
+    <img src="/eventPage.jpg" width="100%" height="20%" /><br><br>
+    <!-- Container for the main content -->
+    <div class="container text-center">
+        <br>
+        <!-- Title for the page -->
+        <h1>{{ currEvent.name }}</h1>
+        <br>
+    </div>
+    <!-- Container for event details -->
+    <div class="container-xl bg-light">
+        <!-- Display event image -->
+        <img [src]="currEvent.image" class="img-fluid img-thumbnail" alt="Event Image"><br>
+        <!-- Display event ID -->
+        <p><strong>Event ID:</strong> {{ currEvent.eventId }}</p>
+        <!-- Display event name -->
+        <p><strong>Event Name:</strong> {{ currEvent.name }}</p>
+        <!-- Display event description -->
+        <p><strong>Description:</strong> {{ currEvent.description }}</p>
+        <!-- Display start date and time -->
+        <p><strong>Start Date Time:</strong> {{ currEvent.startDateTime | date: 'short' }}</p>
+        <!-- Display event duration -->
+        <p><strong>Duration:</strong>
+            {{ currEvent.duration | duration }}
+        </p>
+        <!-- Display event status -->
+        <p><strong>Is Active:</strong>
+            <div class="form-check">
+                <input type="checkbox" id="isActive{{ currEvent.eventId }}" name="isActive{{ currEvent.eventId }}" class="form-check-input" [checked]="currEvent.isActive">
+            </div>
+        <!-- Display event capacity -->
+        <p><strong>Capacity:</strong> {{ currEvent.capacity }}</p>
+        <!-- Display available tickets -->
+        <p><strong>Tickets Available:</strong> {{ currEvent.ticketsAvailable }}</p>
+        <!-- Display category ID -->
+        <p><strong>Category ID:</strong> {{ currEvent.categoryId }}</p>
+    </div>
+</body>
+</html>

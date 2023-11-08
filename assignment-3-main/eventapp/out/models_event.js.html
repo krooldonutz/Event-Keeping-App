@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/event.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/event.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const mongoose = require("mongoose");
+
+/**
+ * @module EventModel
+ */
+
+/**
+ * Mongoose schema for Event.
+ * @class
+ */
+const eventSchema = mongoose.Schema({
+    /**
+     * Unique event ID, generated using generateAlphanumericEvents function.
+     * @type {string}
+     */
+    eventId: {
+        type: String,
+        default: generateAlphanumericEvents,
+    },
+
+    /**
+     * Name of the event (alphanumeric and required).
+     * @type {string}
+     */
+    name: {
+        type: String,
+        required: true,
+        validate: {
+            validator: function (value) {
+                // Use a regular expression to check if the value is alphanumeric
+                return /^[a-zA-Z0-9]+$/.test(value);
+            },
+            message: 'Name must be alphanumeric',
+        },
+    },
+
+    /**
+     * Description of the event.
+     * @type {string}
+     */
+    description: {
+        type: String,
+    },
+
+    /**
+     * Start date and time of the event (required).
+     * @type {Date}
+     */
+    startDateTime: {
+        type: Date,
+        required: true,
+    },
+
+    /**
+     * Duration of the event in minutes (required).
+     * @type {number}
+     */
+    duration: {
+        type: Number,
+        required: true,
+    },
+
+    /**
+     * Indicates whether the event is active (default is true).
+     * @type {boolean}
+     */
+    isActive: {
+        type: Boolean,
+        default: true,
+    },
+
+    /**
+     * URL of the image for the event (default is '/images/default.jpg').
+     * @type {string}
+     */
+    image: {
+        type: String,
+        default: '/images/default.jpg',
+    },
+
+    /**
+     * Maximum capacity of the event (default is 1000, must be between 10 and 2000).
+     * @type {number}
+     */
+    capacity: {
+        type: Number,
+        default: 1000,
+        validate: {
+            validator: function (value) {
+                return value >= 10 &amp;&amp; value &lt;= 2000;
+            },
+            message: "Capacity must be between 10 and 2000",
+        },
+    },
+
+    /**
+     * Number of tickets available for the event (default is the same as capacity).
+     * @type {number}
+     */
+    ticketsAvailable: {
+        type: Number,
+        default: function () {
+            if (this.ticketsAvailable == null) {
+                return this.capacity;
+            }
+        },
+    },
+
+    /**
+     * Category ID associated with the event (required).
+     * @type {string}
+     */
+    categoryId: {
+        type: String,
+        required: true,
+    },
+
+    /**
+     * List of category references associated with the event.
+     * @type {Array}
+     */
+    categoryList: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Category',
+        },
+    ],
+});
+
+/**
+ * Middleware function to add a '/' before the image URL.
+ * @function
+ * @name pre
+ */
+eventSchema.pre('save', function(next) {
+    // Check if the image URL does not already contain a backslash
+    this.image = '/' + this.image;
+    next();
+});
+
+/**
+ * Generate a unique alphanumeric event ID.
+ * @function
+ * @name generateAlphanumericEvents
+ * @returns {string} - Alphanumeric event ID.
+ */
+function generateAlphanumericEvents() {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    // Generate two random characters
+    const randomChars =
+        characters[Math.floor(Math.random() * characters.length)] +
+        characters[Math.floor(Math.random() * characters.length)];
+
+    // Generate a random 4-digit number
+    const randomNumber = Math.floor(Math.random() * 10000)
+        .toString()
+        .padStart(4, "0");
+
+    // Combine the parts to form the final alphanumeric string
+    const alphanumeric = `E${randomChars}-${randomNumber}`;
+
+    return alphanumeric;
+}
+
+/**
+ * Mongoose model for Event.
+ * @type {object}
+ */
+module.exports = mongoose.model("Event", eventSchema);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-CategoryController.html">CategoryController</a></li><li><a href="module-CategoryModel.html">CategoryModel</a></li><li><a href="module-CategoryRoutes.html">CategoryRoutes</a></li><li><a href="module-EventController.html">EventController</a></li><li><a href="module-EventModel.html">EventModel</a></li><li><a href="module-EventRoutes.html">EventRoutes</a></li><li><a href="module-StatsController.html">StatsController</a></li><li><a href="module-StatsModel.html">StatsModel</a></li></ul><h3>Classes</h3><ul><li><a href="module-CategoryModel-category_schema.html">category_schema</a></li><li><a href="module-EventModel-eventSchema.html">eventSchema</a></li><li><a href="module-StatsModel-statsSchema.html">statsSchema</a></li></ul><h3>Global</h3><ul><li><a href="global.html#connect">connect</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Sep 15 2023 14:54:33 GMT+1000 (Australian Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

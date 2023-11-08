@@ -1,0 +1,65 @@
+<div style="text-align: center;">
+    <div class="album py-5">
+      <div class="container">
+        <h3 class="my-2"><span class="custom-font">Update Category</span></h3>
+        <div class="mb-3">
+          <label for="id" class="form-label">ID</label>
+          <input [(ngModel)]="idCurr" type="text" name="id" class="form-control" id="id" readonly />
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 g-3 justify-content-center">
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <form (ngSubmit)="updateCategory()">
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input [(ngModel)]="nameCurr" type="text" name="name" class="form-control" id="name"
+                       required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="desc" class="form-label">Description</label>
+                    <input [(ngModel)]="descCurr" type="text" name="desc" class="form-control" id="desc"
+                       />
+                  </div>
+                  <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input [(ngModel)]="imageCurr" type="text" name="image" class="form-control" id="image"
+                       />
+                  </div>
+                  <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+ <div class="section">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Event Count</th>
+          <th>Image</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of categoryDB">
+          <td>{{ item.name | upperCase }}</td>
+          <td>{{ item.desc }}</td>
+          <td>{{ item.eventsList.length }}</td>
+          <td class="w-25">
+            <img src="{{ item.image }}" class="img-fluid img-thumbnail" alt="Event Image">
+          </td>
+          <button (click)="previewCategory(item)" class="btn btn-primary">Update</button>
+        </tr>
+      </tbody>
+    </table>
+    <router-outlet></router-outlet>
+  </div>
+  

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <title>Category Details</title>
+    <!-- Include Bootstrap CSS styles -->
+    <link href="/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Set background color -->
+    <body style="background-color: #f6f4f2;"></body>
+    
+    <!-- Image banner for the page -->
+    <img src="/eventManagementApp.jpg" width="100%" height="20%" />
+
+    <!-- Container for the header and navigation buttons -->
+    <div class="container text-center"><br>
+        <!-- "Home" button to navigate back to the main page -->
+        <a type="button" class="btn btn-success" href="/">Home</a>
+        <br>
+        <!-- Title and description for the page -->
+        <h1>Category Details</h1>
+        <h5>List all details here</h5>
+        <br>
+    </div>
+    
+    <!-- Container for displaying category details -->
+    <div class="container-xl bg-light">
+        <!-- Display the category image -->
+        <img src="<%= category.image %>" class="img-fluid img-thumbnail" alt="Sheep">
+        
+        <!-- Display category details -->
+        <p><strong>Category ID:</strong> <%= category.categoryID %></p>
+        <p><strong>Category Name:</strong> <%= category.name %></p>
+        <p><strong>Category Description:</strong> <%= category.desc %></p>
+        <p><strong>Created Date Time:</strong> <%= new Date(new Date(category.createdAt).getTime()).toLocaleString('en-UK', {
+            month: 'numeric',
+            day: 'numeric',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        }) %></p>
+    </div>
+    
+    <!-- Container for displaying events related to the category -->
+    <div class="album py-5">
+        <div class="container">
+            <div class="row row-cols-1 g-3">
+                <div class="col">
+                    <!-- Table for displaying event details -->
+                    <table class="table">
+                        <!-- Table header -->
+                        <thead class="table-light">
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Duration</th>
+                                <th>IsActive</th>
+                                <th>Image</th>
+                                <th>Capacity</th>
+                                <th>Tickets Available</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <!-- Table body -->
+                        <tbody>
+                            <% for (let i = 0; i < records.length; i++) { %>
+                                <tr>
+                                    <th><%= records[i].eventId %></th>
+                                    <td><%= records[i].name %></td>
+                                    <td><%= new Date(new Date(records[i].startDateTime).getTime()).toLocaleString('en-UK', {
+                                        month: 'numeric',
+                                        day: 'numeric',
+                                        year: 'numeric',
+                                        hour: 'numeric',
+                                        minute: 'numeric',
+                                        second: 'numeric',
+                                        hour12: true
+                                    }) %></td>
+                                    <!-- Calculate and display end date time -->
+                                    <td><%= new Date(new Date(records[i].startDateTime).getTime() + records[i].duration * 60000)
+                                        .toLocaleString('en-UK', {
+                                            month: 'numeric',
+                                            day: 'numeric',
+                                            year: 'numeric',
+                                            hour: 'numeric',
+                                            minute: 'numeric',
+                                            second: 'numeric',
+                                            hour12: true
+                                        }) %></td>
+                                    <!-- Display duration based on conditions -->
+                                    <td><% if (records[i].duration == 60) { %>
+                                        1 hour
+                                    <% } else if (records[i].duration < 60) { %>
+                                        <%= records[i].duration %> minutes
+                                    <% } else if (records[i].duration % 60 === 0 && records[i].duration >= 120) { %>
+                                        <%= records[i].duration / 60 %> hours
+                                    <% } 
+                                        else if (records[i].duration % 60 != 0) { %>
+                                        <%= Math.floor(records[i].duration / 60) %> hours <%= records[i].duration % 60 %> minutes
+                                    <% } %></td>
+                                    <!-- Display IsActive status with a checkbox -->
+                                    <td>
+                                        <div class="form-check">
+                                            <input type="checkbox" id="isActive<%= i %>" name="isActive<%= i %>" 
+                                                class="form-check-input" <%= records[i].isActive === true ? 'checked' : '' %>>
+                                        </div>
+                                    </td>
+                                    <!-- Display event image -->
+                                    <td class="w-25">
+                                        <img src="<%= records[i].image %>" class="img-fluid img-thumbnail" alt="Sheep">
+                                    </td>
+                                    <!-- Display capacity and tickets available -->
+                                    <td><%= records[i].capacity %></td>
+                                    <td><%= records[i].ticketsAvailable %></td>
+                                    <!-- Display a "View" button to access event details -->
+                                    <td>
+                                        <div class="container">
+                                            <a type="button" class="btn btn-primary" href="/category/32578393/view-event/<%= records[i].eventId %>">View</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

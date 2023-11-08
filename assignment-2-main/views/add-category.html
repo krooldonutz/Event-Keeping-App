@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <title>Add Category Page</title>
+    <!-- Include Bootstrap CSS styles -->
+    <link href="/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Main content begins -->
+    <main>
+        <!-- Set background color -->
+        <body style="background-color: #f6f4f2;"></body>
+        
+        <!-- Display an image banner -->
+        <img src="/eventManagementApp.jpg" width="100%" height="20%" alt="Event Image"> 
+        
+        <!-- Container for the form and content -->
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <!-- Container for header and navigation buttons -->
+                <div class="container text-center">
+                    <!-- "Home" button to navigate back to the main page -->
+                    <a type="button" class="btn btn-success" href="/">Home</a>
+                    <br><br>
+                    <!-- Title and description for the form -->
+                    <h2>Add Category</h2>
+                    <h5>Fill in category details & click submit</h5>
+                </div>
+                <!-- Card body containing the category form -->
+                <div class="card-body">
+                    <!-- Category submission form -->
+                    <form action="/category/32578393/add-category" method="POST">
+                        <!-- Input field for Category Name -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Category Name</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Enter Category name" />
+                        </div>
+
+                        <!-- Input field for Category Description -->
+                        <div class="mb-3">
+                            <label for="year" class="form-label">Category Description</label>
+                            <input type="text" name="desc" class="form-control" id="desc" placeholder="Enter category description" />
+                        </div>
+
+                        <!-- Dropdown for selecting a picture -->
+                        <div class="mb-3">
+                            <label for="picture" class="form-label">Select Picture</label>
+                            <input type="text" name="picture" class="form-control" placeholder="Enter Picture" required>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button class="btn btn-secondary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- JavaScript code to dynamically populate the dropdown -->
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <title>Event Details</title>
+    <!-- Include Bootstrap CSS styles -->
+    <link href="/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Set background color for the body -->
+    <body style="background-color: #f6f4f2;"></body>
+    <!-- Image banner for the page -->
+    <img src="/eventPage.jpg" width="100%" height="20%" /><br><br>
+    <!-- Container for the main content -->
+    <div class="container text-center">
+        <!-- Button to navigate back to the Home page -->
+        <a type="button" class="btn btn-success" href="/">Home</a><br>
+        <br>
+        <!-- Title for the page -->
+        <h1><%= event.name %></h1>
+        <br>
+    </div>
+    <!-- Container for event details -->
+    <div class="container-xl bg-light">
+        <!-- Display event image -->
+        <img src="<%= event.image %>" class="img-fluid img-thumbnail" alt="Sheep"><br>
+        <!-- Display event ID -->
+        <p><strong>Event ID:</strong> <%= event.eventId %></p>
+        <!-- Display event name -->
+        <p><strong>Event Name:</strong> <%= event.name %></p>
+        <!-- Display event description -->
+        <p><strong>Description:</strong> <%= event.description %></p>
+        <!-- Display start date and time -->
+        <p><strong>Start Date Time:</strong> <%= new Date(new Date(event.startDateTime).getTime()).toLocaleString('en-UK', {
+            month: 'numeric',
+            day: 'numeric',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        }) %></p>
+        <!-- Display end date and time -->
+        <p><strong>End Date Time:</strong> <%= new Date(new Date(event.startDateTime).getTime() + event.duration * 60000)
+            .toLocaleString('en-UK', {
+                month: 'numeric',
+                day: 'numeric',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                hour12: true
+            }) %></p>
+        <!-- Display event duration -->
+        <p><strong>Duration:</strong>
+            <% if (event.duration == 60) { %>
+                1 hour
+            <% } else if (event.duration < 60) { %>
+                <%= event.duration %> minutes
+            <% } else if (event.duration % 60 === 0 && event.duration >= 120) { %>
+                <%= event.duration / 60 %> hours
+            <% } 
+                else if (event.duration % 60 != 0) { %>
+                <%= Math.floor(event.duration / 60) %> hours <%= event.duration % 60 %> minutes
+            <% } %>
+        </p>
+        <!-- Display event status -->
+        <p><strong>Is Active:</strong>
+            <div class="form-check">
+                <input type="checkbox" id="isActive<%=  %>"  
+                    class="form-check-input" <%= event.isActive === true ? 'checked' : '' %>>
+            </div>
+        </p>
+        <!-- Display event capacity -->
+        <p><strong>Capacity:</strong> <%= event.capacity %></p>
+        <!-- Display available tickets -->
+        <p><strong>Tickets Available:</strong> <%= event.ticketsAvailable %></p>
+        <!-- Display category ID -->
+        <p><strong>Category ID:</strong> <%= event.categoryId %></p>
+    </div>
+</body>
+</html>

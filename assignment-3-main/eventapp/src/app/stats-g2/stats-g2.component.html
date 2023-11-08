@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Include Bootstrap CSS styles -->
+    <link href="/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="background-color: #f6f4f2;">
+    <!-- Image banner for the page -->
+    <img src="/eventManagementApp.jpg" width="100%" height="20%" />
+
+    <!-- Container for the counters -->
+    <div class="container text-center d-flex align-items-center justify-content-center">
+        <!-- Create a single flex container for horizontal arrangement -->
+        <div class="d-flex">
+            <!-- Individual containers -->
+            <div class="container mt-4">
+                <div class="border border-dark rounded bg-light text-center" style="width: 180px; height: 120px;">
+                    <br>
+                    <h2>{{record.recordsCreated}}</h2>
+                    <h6 class="m-0">Records Created</h6>
+                </div>
+            </div>
+            <div class="container mt-4">
+                <div class="border border-dark rounded bg-light text-center" style="width: 180px; height: 120px;">
+                    <br>
+                    <h2>{{record.recordsDeleted}}</h2>
+                    <h6 class="m-0">Records Deleted</h6>
+                </div>
+            </div>
+            <div class="container mt-4">
+                <div class="border border-dark rounded bg-light text-center" style="width: 180px; height: 120px;">
+                    <br>
+                    <h2>{{record.recordsUpdated}}</h2>
+                    <h6 class="m-0">Records Updated</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

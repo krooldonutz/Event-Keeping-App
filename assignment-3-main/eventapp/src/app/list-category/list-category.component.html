@@ -1,0 +1,25 @@
+<div class="section">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Event Count</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of categoryDB">
+          <td>{{ item.name | upperCase }}</td>
+          <td>{{ item.desc }}</td>
+          <td>{{ item.eventsList.length }}</td>
+          <td class="w-25">
+            <img src="{{ item.image }}" class="img-fluid img-thumbnail" alt="Event Image">
+          </td>
+          <button (click)="viewCategory(item)" class="btn btn-primary">View</button>
+        </tr>
+      </tbody>
+    </table>
+    <router-outlet></router-outlet>
+  </div>
+  

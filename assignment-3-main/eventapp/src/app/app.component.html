@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/listcategory" routerLinkActive="active">List Categories</a>
+    </li>
+    <li class="nav-item">
+
+      <a class="nav-link" routerLink="/addcategory" routerLinkActive="active">Add Category</a>
+    </li>
+
+    <li class="nav-item">
+
+      <a class="nav-link" routerLink="/deletecategory" routerLinkActive="active">Delete Category</a>
+    </li>
+
+    <li class="nav-item">
+
+      <a class="nav-link" routerLink="/updatecategory" routerLinkActive="active">Update Category</a>
+    </li>
+
+    <li class="nav-item">
+
+      <a class="nav-link" routerLink="/texttospeech" routerLinkActive="active">Text To Speech</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/list-events" routerLinkActive="active">List Events</a>
+    </li>
+    <li class="nav-item">
+
+      <a class="nav-link" routerLink="/add-event" routerLinkActive="active">Add Event</a>
+    </li>
+
+    <li class="nav-item">
+
+      <a class="nav-link" routerLink="/delete-event" routerLinkActive="active">Delete Event</a>
+    </li>
+    <li class="nav-item">
+
+      <a class="nav-link" routerLink="/update-event" routerLinkActive="active">Update Event</a>
+    </li>
+    <li class="nav-item">
+
+      <a class="nav-link" routerLink="/translator" routerLinkActive="active">Translator</a>
+    </li>
+
+    <li class="nav-item">
+
+      <a class="nav-link" routerLink="/stats-g2" routerLinkActive="active">Statistic G2</a>
+    </li>
+
+
+  </ul>
+</nav>
+
+
+<div class="container text-center">
+  <!-- Create a single flex container for horizontal arrangement -->
+  <div class="d-flex">
+      <!-- Individual containers -->
+      <div class="container mt-4">
+          <div class="border border-dark rounded bg-light text-center" style="width: 180px; height: 120px;">
+              <br>
+              <h2>{{ eventNum }}</h2>
+              <span class="m-0">Events</span>
+          </div>
+      </div>
+      <div class="container mt-4">
+          <div class="border border-dark rounded bg-light text-center" style="width: 180px; height: 120px;">
+              <br>
+              <h2>{{ categNum }}</h2>
+              <span class="m-0">Categories</span>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>

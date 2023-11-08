@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <title>Add Event Page</title>
+    <!-- Include Bootstrap CSS styles -->
+    <link href="/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="background-color: #f6f4f2;">
+    <!-- Background color and image banner -->
+    <img src="/eventManagementApp.jpg" width="100%" height="20%" alt="Event Image"> <br>
+    
+    <div class="container text-center">
+    <div id="chatContainer">
+    <div class="chatform">
+      <div class="form-group">
+        <br>
+        <label for="text">Text To Translate</label><br>
+        <input type="text" class="form-control" id="text" placeholder="Text to translate" [(ngModel)]="text">
+      </div><br>
+    <!-- Dropdown for selecting a language -->
+    <div class="form-group">
+      <label for="text">Select a Language</label>
+      <select class="form-control" [(ngModel)]="target">
+        <option disabled selected>Select a Language</option>
+        <option>Chinese</option>
+        <option>Japanese</option>
+        <option>French</option>
+      </select>
+    </div><br>
+    <button (click)="sendMessage()" type="submit" class="btn btn-secondary">Translate </button>
+    <br><br>
+  
+  <div class="container mb-3">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Original Text</th>
+          <th>Target Language</th>
+          <th>Translation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of allTranslate.slice().reverse()">
+          <td>{{ item.text }}</td>
+          <td>{{ item.target }}</td>
+          <td>{{ item.translation }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

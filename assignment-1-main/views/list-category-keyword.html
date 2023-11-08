@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+    <title>Keyword Category Page</title>
+    <!-- Include Bootstrap CSS styles -->
+    <link href="/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Set background color for the body -->
+    <body style="background-color: #f6f4f2;">
+    <!-- Image banner for the page -->
+    <img src="/eventManagementApp.jpg" width="100%" height="20%" alt="Event Image"> 
+    <!-- Container for the main content -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <!-- Container for the header and navigation buttons -->
+            <div class="container text-center">
+                <!-- Button to navigate back to the Home page -->
+                <a type="button" class="btn btn-success" href="/">Home</a>
+                <br><br>
+                <!-- Title and description for the page -->
+                <h2>Category with word <%= text %></h2><br>
+                <!-- Button to add a new category -->
+                <a type="button" class="btn btn-secondary" href="/category/32578393/add-category">Add New Category</a>
+                <!-- Button to delete a category -->
+                <a type="button" class="btn btn-secondary" href="/category/32578393/delete-category">Delete A Category</a>
+            </div>
+            <!-- Container for the category listing -->
+            <div class="album py-5">
+                <div class="container">
+                    <div class="row row-cols-1 g-3">
+                        <div class="col">
+                            <!-- Table to display category details -->
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Created At</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Loop through category records -->
+                                    <% for (let i = 0; i < records.length; i++) { %>
+                                    <tr>
+                                        <!-- Display category ID -->
+                                        <th scope="row"><%= records[i].id %></th>
+                                        <!-- Display category name -->
+                                        <td><%= records[i].name %></td>
+                                        <!-- Display category description -->
+                                        <td><%= records[i].desc %></td>
+                                        <!-- Display category creation date -->
+                                        <td><%= new Date(new Date(records[i].createdAt).getTime()).toLocaleString('en-US', {
+                                            month: 'numeric',
+                                            day: 'numeric',
+                                            year: 'numeric',
+                                            hour: 'numeric',
+                                            minute: 'numeric',
+                                            second: 'numeric',
+                                            hour12: true
+                                        }) %></td>
+                                        <!-- Display a button to view category details -->
+                                        <td>
+                                            <div class="container">
+                                                <a type="button" class="btn btn-primary" href="/cherylyn/category/<%= records[i].id %>">View</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

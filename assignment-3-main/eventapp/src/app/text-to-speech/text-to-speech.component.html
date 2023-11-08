@@ -1,0 +1,27 @@
+<div style="text-align: center;">
+    <div class="album py-5">
+      <div class="container">
+        <h3 class="my-2"><span class="custom-font">Text To Speech</span></h3>
+        <div class="row row-cols-1 row-cols-sm-2 g-3 justify-content-center">
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <form (ngSubmit)="textToSpeech()">
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Text</label>
+                    <textarea [(ngModel)]="textBox" name="name" class="form-control" id="name" rows="5"
+                    required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+         <!-- <audio controls *ngIf="soundPath">
+        <source [src]="audio" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio> -->
+      </div>
+    </div>
+  </div>
